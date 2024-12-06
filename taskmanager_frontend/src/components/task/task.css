@@ -1,0 +1,32 @@
+.task {
+	border: 2px solid grey;
+	border-radius: 7px;
+	margin: 1rem;
+	padding: 1rem;
+	position: relative;
+}
+.gombok {
+	display: flex;
+	gap: 20rem;
+	position: relative;
+}
+.del {
+	position: absolute;
+	align-items: right;
+	text-align: right;
+	right: 0;
+}
+.adatok {
+	margin-block: 2rem;
+}
+.tároló {
+	border: 1px solid grey;
+	border-radius: 5px;
+	padding: 0.5rem;
+	display: inline;
+	width: fit-content;
+	height: fit-content;
+	padding-block: 2px;
+	padding-inline: 10px;
+	margin-inline: 3rem;
+}

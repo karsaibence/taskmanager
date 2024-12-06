@@ -1,0 +1,15 @@
+nav{
+    background-color: orange;
+    height: 40px;
+
+}
+ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
