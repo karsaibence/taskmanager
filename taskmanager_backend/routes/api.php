@@ -13,3 +13,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/tasks',[TaskController::class, 'index']);
 Route::get('/users',[UserController::class, 'index']);
+Route::delete('/tasks/{id}',[TaskController::class, 'destroy']);
