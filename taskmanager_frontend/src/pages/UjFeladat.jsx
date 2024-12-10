@@ -1,13 +1,16 @@
 import React, { useContext, useState } from 'react'
 import { DataContext } from '../context/ApiContext';
+import "./ujFeladat.css"
 
 const UjFeladat = () => {
-  const { user, task, setTask, postTask } = useContext( DataContext );
+  const today = new Date().toISOString().split( 'T' )[ 0 ];
+  const { user, postTask } = useContext( DataContext );
   const [ cim, setCim ] = useState( "" );
   const [ leiras, setLeiras ] = useState( "" );
   const [ status, setStatus ] = useState();
-  const [ hatarido, setHatarido ] = useState();
+  const [ hatarido, setHatarido ] = useState( today );
   const [ felhasznalo, SetFelhasznalo ] = useState();
+
 
 
   const handleChange = ( event ) => {
@@ -18,9 +21,7 @@ const UjFeladat = () => {
     SetFelhasznalo( event.target.value )
   }
 
-  const handleOnSubmit = ( event ) => {
-    //event.preventDefault();
-    const tempTask = [ ...task ]
+  const handleOnSubmit = () => {
     const mentettFelhasz = {
       title: cim,
       description: leiras,
@@ -28,23 +29,7 @@ const UjFeladat = () => {
       user_id: userIDKeres(),
       status: status
     }
-    tempTask.push( mentettFelhasz )
-
-    setTask( tempTask )
-
-    const handleSubmit = async () => {
-      // event.preventDefault();
-      try {
-        const savedUser = await postTask( mentettFelhasz );
-        console.log( "Siker:", savedUser );
-      } catch ( err ) {
-        console.error( "Mentési hiba:", err );
-      }
-    };
-    handleSubmit();
-
-    console.log( task )
-
+    postTask( mentettFelhasz )
   }
 
 
@@ -60,7 +45,7 @@ const UjFeladat = () => {
   }
 
   return (
-    <div>
+    <div className='newTask'>
       <form onSubmit={handleOnSubmit}>
         <label>Cím:
           <input
@@ -100,7 +85,9 @@ const UjFeladat = () => {
             }
           </select>
         </label>
-        <input type="submit" />
+        <label>
+          <input type="submit" />
+        </label>
       </form>
     </div>
   )

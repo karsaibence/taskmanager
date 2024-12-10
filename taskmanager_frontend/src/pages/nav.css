@@ -1,15 +1,18 @@
-nav{
-    background-color: orange;
-    height: 40px;
-
+nav {
+	background-color: orange;
+	padding: 0.2rem;
 }
-ul{
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
+ul {
+	list-style-type: none;
+	gap: 2rem;
+	width: 75%;
+	margin-inline: auto;
 }
-a{
-    text-decoration: none;
-    color: black;
+li {
+	display: inline;
+    margin: 2rem;
+}
+a {
+	text-decoration: none;
+	color: black;
 }

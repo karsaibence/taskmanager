@@ -1,0 +1,28 @@
+.newTask {
+	margin-block: 1rem;
+    padding: 1rem;
+	width: 50vw;
+	margin-inline: auto;
+    border:2px solid grey;
+    border-radius: .5rem;
+}
+
+.newTask form {
+    display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+.newTask select {
+    position: absolute;
+	left: 200px;
+}
+
+.newTask label {
+    margin: 0.5rem;
+	position: relative;
+    margin-left: 30%;
+}
+.newTask input{
+    position: absolute;
+	left: 200px;
+}

@@ -12,13 +12,21 @@ export const DataProvider = ( { children } ) => {
     const [ error, setError ] = useState( null ); // Hibakezelés
 
     // Fetch data from API
-    const fetchData = async () => {
+    const fetchTaskData = async () => {
+        try {
+            const response = await axios.get( "http://localhost:8000/api/tasks" );
+            setTask( response.data );
+        } catch ( err ) {
+            setError( err.message );
+        } finally {
+            setLoading( false );
+        }
+    };
+
+    const fetchUserData = async () => {
         try {
             const response = await axios.get( "http://localhost:8000/api/users" );
             setUser( response.data ); // Mentés a listába
-            console.log( response );
-            const response2 = await axios.get( "http://localhost:8000/api/tasks" );
-            setTask( response2.data );
         } catch ( err ) {
             setError( err.message );
         } finally {
@@ -27,18 +35,10 @@ export const DataProvider = ( { children } ) => {
     };
 
     const deleteResource = async ( id ) => {
-        const tempTask = [ ...task ]
-        for ( let index = 0; index < tempTask.length; index++ ) {
-            const e = tempTask[ index ];
-            if ( id === e.id ) {
-                tempTask.splice( index, 1 );
-            }
-        }
-        setTask( tempTask )
-
         try {
             const response = await axios.delete( `http://localhost:8000/api/tasks/${ id }` );
             console.log( 'Sikeres törlés:', response.data );
+            fetchTaskData();
         } catch ( error ) {
             console.error( 'Hiba a törlés során:', error.response ? error.response.data : error.message );
         }
@@ -49,6 +49,7 @@ export const DataProvider = ( { children } ) => {
         try {
             const response = await axios.post( 'http://localhost:8000/api/store-tasks/', userData );
             console.log( 'sikeres mentés:', response.data )
+            fetchTaskData();
         } catch ( error ) {
             console.log( 'Hiba a mentés során:', error.response ? error.response.data : error.message );
         }
@@ -58,18 +59,31 @@ export const DataProvider = ( { children } ) => {
         try {
             const response = await axios.put( `http://localhost:8000/api/taskss/${ id }`, e );
             console.log( 'sikeres módosítás', response.data )
+            fetchTaskData();
         } catch ( error ) {
             console.log( 'Hiba a módosítás során:', error.response ? error.response.data : error.message );
         }
     }
 
+
+    function userNameKeres( id ) {
+        let name = "";
+        user.forEach( e => {
+            if ( e.user_id === id ) {
+                name = e.name
+            }
+        } );
+        return name
+    }
+
     // Fetch data when the component mounts
     useEffect( () => {
-        fetchData();
+        fetchTaskData();
+        fetchUserData();
     }, [] );
 
     return (
-        <DataContext.Provider value={{ user, task, loading, error, deleteResource, setTask, postTask, putTask, fetchData }}>
+        <DataContext.Provider value={{ user, loading, error, task, deleteResource, setTask, postTask, putTask, userNameKeres, fetchTaskData }}>
             {children}
         </DataContext.Provider>
     );

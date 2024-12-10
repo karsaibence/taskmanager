@@ -1,7 +1,35 @@
-.tasks{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 50vw;
-    margin-inline: auto;
+.tasks {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 50vw;
+	margin-inline: auto;
+}
+.modosit form {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+    
+}
+.modosit {
+    margin-block: 1rem;
+    padding: 1rem;
+	width: 50vw;
+	margin-inline: auto;
+    border:2px solid grey;
+    border-radius: .5rem;
+}
+.modosit label {
+	margin: 0.5rem;
+	position: relative;
+    margin-left: 30%;
+}
+.modosit input {
+	position: absolute;
+	left: 200px;
+}
+
+.modosit select {
+	position: absolute;
+	left: 200px;
 }

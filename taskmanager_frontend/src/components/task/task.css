@@ -21,12 +21,14 @@
 }
 .tároló {
 	border: 1px solid grey;
-	border-radius: 5px;
-	padding: 0.5rem;
+	border-radius: 25px;
 	display: inline;
 	width: fit-content;
 	height: fit-content;
-	padding-block: 2px;
+	font-size: smaller;
+	font-weight: 400;
+	color: gray;
+	padding-block: 5px;
 	padding-inline: 10px;
 	margin-inline: 3rem;
 }

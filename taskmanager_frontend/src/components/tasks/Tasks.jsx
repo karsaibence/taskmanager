@@ -4,16 +4,16 @@ import Task from '../task/Task'
 import './tasks.css'
 
 const Tasks = () => {
-    const { user, task, fetchData, setTask, putTask } = useContext( DataContext );
+    const today = new Date().toISOString().split( 'T' )[ 0 ];
+    const { user, task, putTask } = useContext( DataContext );
     const [ cim, setCim ] = useState( "" );
     const [ leiras, setLeiras ] = useState( "" );
     const [ status, setStatus ] = useState();
-    const [ hatarido, setHatarido ] = useState();
+    const [ hatarido, setHatarido ] = useState( today );
     const [ felhasznalo, SetFelhasznalo ] = useState();
 
     function modositClick( id ) {
         let modID;
-        const tempTask = [ ...task ]
         task.forEach( e => {
             if ( e.id === id ) {
                 modID = {
@@ -24,54 +24,10 @@ const Tasks = () => {
                     user_id: userIDKeres(),
                     status: status
                 }
-                tempTask[ e ] = modID
             }
         } );
-
         putTask( modID, modID.id )
-        //setTask( tempTask )
-        fetchData();
-        console.log( task )
     }
-
-
-    const handleChange = ( event ) => {
-        setStatus( event.target.value )
-    }
-
-    const handleUserChange = ( event ) => {
-        SetFelhasznalo( event.target.value )
-    }
-
-    /* const handleOnSubmit = ( event ) => {
-         console.log( event.target.value )
-         const tempTask = [ ...task ]
-         const mentettFelhasz = {
-             title: cim,
-             description: leiras,
-             end_date: hatarido,
-             user_id: userIDKeres(),
-             status: status
-         }
-         tempTask.push( mentettFelhasz )
- 
-         //setTask( tempTask )
- 
-         const handleSubmit = async () => {
-             // event.preventDefault();
-             try {
-                 const savedUser = await putTask( mentettFelhasz );
-                 console.log( "Siker:", savedUser );
-             } catch ( err ) {
-                 console.error( "Mentési hiba:", err );
-             }
-         };
-         handleSubmit();
- 
-         console.log( task )
- 
-     }*/
-
 
     function userIDKeres() {
         let id = -1;
@@ -84,9 +40,19 @@ const Tasks = () => {
         return id
     }
 
+    const handleChange = ( event ) => {
+        setStatus( event.target.value )
+    }
+
+    const handleUserChange = ( event ) => {
+        SetFelhasznalo( event.target.value )
+    }
+
+
+
     return (
         <div>
-            <div className='modosít'>
+            <div className='modosit'>
                 <form>
                     <label>Cím:
                         <input
