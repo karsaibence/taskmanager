@@ -13,4 +13,6 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/tasks',[TaskController::class, 'index']);
 Route::get('/users',[UserController::class, 'index']);
+Route::post('/store-tasks',[TaskController::class, 'store']);
+Route::put('/taskss/{id}',[TaskController::class, 'update']);
 Route::delete('/tasks/{id}',[TaskController::class, 'destroy']);

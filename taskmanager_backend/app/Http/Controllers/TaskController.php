@@ -20,7 +20,9 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task=new Task();
+        $task->fill($request->all());
+        $task->save();
     }
 
     /**
@@ -28,7 +30,7 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        //
+       //
     }
 
     /**
@@ -36,7 +38,9 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         $task=Task::find($id);
+        $task->fill($request->all());
+        $task->save();
     }
 
     /**

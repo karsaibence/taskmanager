@@ -31,10 +31,11 @@ export const DataProvider = ( { children } ) => {
         for ( let index = 0; index < tempTask.length; index++ ) {
             const e = tempTask[ index ];
             if ( id === e.id ) {
-                tempTask.splice(index,1);
+                tempTask.splice( index, 1 );
             }
         }
         setTask( tempTask )
+
         try {
             const response = await axios.delete( `http://localhost:8000/api/tasks/${ id }` );
             console.log( 'Sikeres törlés:', response.data );
@@ -43,13 +44,32 @@ export const DataProvider = ( { children } ) => {
         }
     };
 
+
+    const postTask = async ( userData ) => {
+        try {
+            const response = await axios.post( 'http://localhost:8000/api/store-tasks/', userData );
+            console.log( 'sikeres mentés:', response.data )
+        } catch ( error ) {
+            console.log( 'Hiba a mentés során:', error.response ? error.response.data : error.message );
+        }
+    }
+
+    const putTask = async ( e, id ) => {
+        try {
+            const response = await axios.put( `http://localhost:8000/api/taskss/${ id }`, e );
+            console.log( 'sikeres módosítás', response.data )
+        } catch ( error ) {
+            console.log( 'Hiba a módosítás során:', error.response ? error.response.data : error.message );
+        }
+    }
+
     // Fetch data when the component mounts
     useEffect( () => {
         fetchData();
     }, [] );
 
     return (
-        <DataContext.Provider value={{ user, task, loading, error, deleteResource }}>
+        <DataContext.Provider value={{ user, task, loading, error, deleteResource, setTask, postTask, putTask, fetchData }}>
             {children}
         </DataContext.Provider>
     );
